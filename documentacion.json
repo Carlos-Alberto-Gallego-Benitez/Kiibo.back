@@ -1,0 +1,916 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de prueba",
+      "description": "Api de prueba",
+      "version": "1.0"
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8000"
+      }
+    ],
+    "paths": {
+      "/api/auth/register": {
+        "post": {
+          "tags": [
+            "Autenticación"
+          ],
+          "summary": "Registrar un nuevo usuario",
+          "description": "Registrar un nuevo usuario",
+          "operationId": "c7bb21a0d87049e161b8e4c9b0d909f2",
+          "requestBody": {
+            "description": "Datos del usuario a registrar",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                  ],
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "John Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "john.doe@example.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "Password123"
+                    },
+                    "password_confirmation": {
+                      "type": "string",
+                      "example": "Password123"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "CREATED",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-02-23T00:09:16.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-02-23T12:33:45.000000Z"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "BAD REQUEST",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Error message"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/auth/login": {
+        "post": {
+          "tags": [
+            "Autenticación"
+          ],
+          "summary": "Autenticar un usuario y devolver un token",
+          "description": "Autenticar un usuario",
+          "operationId": "dd51a484b7fa0f97c7680fdbde14cf5f",
+          "requestBody": {
+            "description": "Credenciales para autenticación",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "email",
+                    "password"
+                  ],
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "john.doe@example.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "Password123"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "user": {
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "John Doe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "john.doe@example.com"
+                          },
+                          "created_at": {
+                            "type": "string",
+                            "example": "2023-02-23T00:09:16.000000Z"
+                          },
+                          "updated_at": {
+                            "type": "string",
+                            "example": "2023-02-23T12:33:45.000000Z"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "token": {
+                        "type": "string",
+                        "example": "token_value_here"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "UNAUTHORIZED",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Invalid credentials"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/auth/profile": {
+        "get": {
+          "tags": [
+            "Autenticación"
+          ],
+          "summary": "Obtener información del perfil del usuario autenticado",
+          "description": "Obtener perfil del usuario autenticado",
+          "operationId": "b1eb3bba5d25e3becff8e61e26215556",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-02-23T00:09:16.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-02-23T12:33:45.000000Z"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "UNAUTHORIZED",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Unauthenticated."
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearer_token": [ ]
+            }
+          ]
+        }
+      },
+      "/api/auth/logout": {
+        "post": {
+          "tags": [
+            "Autenticación"
+          ],
+          "summary": "Cerrar sesión del usuario autenticado",
+          "description": "Cerrar la sesión del usuario autenticado",
+          "operationId": "df9bdc6c7a6d9f20b983526b2ec0f698",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Logged out"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "UNAUTHORIZED",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Unauthenticated."
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "bearer_token": [ ]
+            }
+          ]
+        }
+      },
+      "/api/tareas": {
+        "get": {
+          "tags": [
+            "Tareas"
+          ],
+          "summary": "Listado de usuarios",
+          "operationId": "2493988f69d01796099b082aa85966f7",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "rows": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": "1"
+                            },
+                            "id_usuario": {
+                              "type": "number",
+                              "example": "1"
+                            },
+                            "titulo": {
+                              "type": "string",
+                              "example": "prueba"
+                            },
+                            "descripcion": {
+                              "type": "string",
+                              "example": "prueba"
+                            },
+                            "fecha_limite": {
+                              "type": "string",
+                              "example": "2023-02-23"
+                            },
+                            "estado": {
+                              "type": "string",
+                              "example": "Pendiente"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Tareas"
+          ],
+          "summary": "Crear una nueva tarea",
+          "operationId": "7b25afab68f5e724c98dc510c5df2217",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id_usuario": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "titulo": {
+                      "type": "string",
+                      "example": "Tarea 1"
+                    },
+                    "descripcion": {
+                      "type": "string",
+                      "example": "Descripcion de la tarea"
+                    },
+                    "fecha_limite": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "estado": {
+                      "type": "string",
+                      "example": "Pendiente"
+                    }
+                  },
+                  "type": "object"
+                },
+                "example": "2023-02-23"
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "CREATED"
+            },
+            "400": {
+              "description": "BAD REQUEST"
+            }
+          }
+        }
+      },
+      "/api/tareas/{id}": {
+        "get": {
+          "tags": [
+            "Tareas"
+          ],
+          "summary": "Mostrar una tarea específica",
+          "operationId": "33adaac00a557cf973e21ad403ca8ba5",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id_usuario": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "titulo": {
+                        "type": "string",
+                        "example": "prueba"
+                      },
+                      "descripcion": {
+                        "type": "string",
+                        "example": "prueba"
+                      },
+                      "fecha_limite": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-6-7"
+                      },
+                      "estado": {
+                        "type": "string",
+                        "example": "pendiente"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "BAD REQUEST"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Tareas"
+          ],
+          "summary": "Actualizar una tarea específica",
+          "operationId": "6f8e8a5de70a166605458b48edf1feed",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id_usuario": {
+                      "type": "integer"
+                    },
+                    "titulo": {
+                      "type": "string"
+                    },
+                    "descripcion": {
+                      "type": "string"
+                    },
+                    "fecha_limite": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "estado": {
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "BAD REQUEST"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Tareas"
+          ],
+          "summary": "Eliminar una tarea específica",
+          "operationId": "5c3c6638cc4411907241c6ff71f2b971",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK"
+            },
+            "400": {
+              "description": "BAD REQUEST"
+            }
+          }
+        }
+      },
+      "/api/users": {
+        "get": {
+          "tags": [
+            "Usuarios"
+          ],
+          "summary": "Listado de usuarios",
+          "operationId": "566aed8efb436ca506e0ef51a032ecd9",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "rows": {
+                        "type": "array",
+                        "items": {
+                          "properties": {
+                            "id": {
+                              "type": "number",
+                              "example": "1"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Joe Doe"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "prueba@gmail.com"
+                            },
+                            "created_at": {
+                              "type": "string",
+                              "example": "2023-02-23T00:09:16.000000Z"
+                            },
+                            "updated_at": {
+                              "type": "string",
+                              "example": "2023-02-23T12:33:45.000000Z"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Usuarios"
+          ],
+          "summary": "Crear un nuevo usuario",
+          "description": "Registrar un nuevo usuario",
+          "operationId": "be551c1d694a01c164966f58bfa77013",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Joe Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "prueba@gmail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "password123"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "CREATED",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Joe Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "prueba@gmail.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-02-23T00:09:16.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-02-23T12:33:45.000000Z"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "BAD REQUEST",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Validation Error"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/users/{id}": {
+        "get": {
+          "tags": [
+            "Usuarios"
+          ],
+          "summary": "Mostrar la información de un usuario",
+          "operationId": "6f51bd5fa2dddcd25e44cfa53dcbd10a",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Joe Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "prueba@gmail.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-02-23T00:09:16.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-02-23T12:33:45.000000Z"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "NOT FOUND",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Usuarios"
+          ],
+          "summary": "Actualizar un usuario existente",
+          "description": "Actualizar la información de un usuario",
+          "operationId": "070e37fc9aff78ae73860751bc990ed3",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Jon Doe"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "jon.doe@gmail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "newpassword123"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Jon Doe"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "jon.doe@gmail.com"
+                      },
+                      "created_at": {
+                        "type": "string",
+                        "example": "2023-02-23T00:09:16.000000Z"
+                      },
+                      "updated_at": {
+                        "type": "string",
+                        "example": "2023-02-23T12:33:45.000000Z"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "BAD REQUEST",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Validation Error"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Usuarios"
+          ],
+          "summary": "Eliminar un usuario existente",
+          "description": "Eliminar un usuario",
+          "operationId": "0b4133ed462528a5e648b88ead11e929",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Registro eliminado"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "BAD REQUEST",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Error message"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "NOT FOUND",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
