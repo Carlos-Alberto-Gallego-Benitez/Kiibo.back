@@ -76,7 +76,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 6. Generar las migraciones con este comando: <b>php artisan migrate --seed</b>
 7. Generar la documentacion ejecuta este comando: <b>php artisan l5-swagger:generate</b>
 
-En Kiibo.api-back-end.postman_collection.json puede importar el postman con las peticiones principales ya creadas para loguearse e iniciar sesión luego debe abrir la doc de swagger para realizar las respectivas tareas de que se documentaron en esta.
+En Kiibo.api-back-end.postman_collection.json puede importar el postman con las peticiones principales ya creadas para loguearse e iniciar sesión luego debe abrir la doc de swagger para realizar las respectivas tareas que se documentaron en esta.
 
 Nota: por cada petición a parte del registro y login que se haga, debe pasar el token generado al iniciar sesión, este debe ir en la pestaña de Authorization (selecciona Bearer Token ) en el postman en otro edit debe buscar estas opciones 
 
